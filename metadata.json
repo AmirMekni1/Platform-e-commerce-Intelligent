@@ -1,0 +1,7 @@
+{
+  "name": "KARTAGO 3D - Mode & Sneakers Tunisie",
+  "description": "Boutique en ligne premium tunisienne avec visualiseur 3D interactif de chaussures, personnalisation des couleurs/tailles, Conseiller IA Tunisien et facturation électronique automatisée.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

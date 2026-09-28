@@ -1,0 +1,253 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with authentication and subscription details",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique user ID matching Firebase Auth UID"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User email address"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User full name"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["customer", "admin"],
+          "description": "User role for authorization"
+        },
+        "subscriptionTier": {
+          "type": "string",
+          "enum": ["free", "vip_club", "premium"],
+          "description": "Subscription tier to KARTAGO club"
+        },
+        "governorate": {
+          "type": "string",
+          "description": "Tunisian governorate"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Account creation timestamp"
+        },
+        "totalSpent": {
+          "type": "number",
+          "description": "Cumulative total spent in Dinars"
+        }
+      },
+      "required": ["id", "email", "role"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer order with electronic invoice details",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Order reference ID"
+        },
+        "invoiceNumber": {
+          "type": "string",
+          "description": "Official electronic invoice number"
+        },
+        "customerId": {
+          "type": "string",
+          "description": "ID of the customer who made the order"
+        },
+        "customerName": {
+          "type": "string",
+          "description": "Name on the order invoice"
+        },
+        "customerEmail": {
+          "type": "string",
+          "format": "email",
+          "description": "Email address for invoice delivery"
+        },
+        "customerPhone": {
+          "type": "string",
+          "description": "Phone number"
+        },
+        "address": {
+          "type": "string",
+          "description": "Delivery address"
+        },
+        "governorate": {
+          "type": "string",
+          "description": "Tunisian governorate"
+        },
+        "paymentMethod": {
+          "type": "string",
+          "description": "Selected payment method"
+        },
+        "subtotalHT": {
+          "type": "number",
+          "description": "Subtotal before taxes"
+        },
+        "tvaAmount": {
+          "type": "number",
+          "description": "TVA 19% amount"
+        },
+        "timbreFiscal": {
+          "type": "number",
+          "description": "Tunisian fiscal stamp (1.000 DT)"
+        },
+        "shippingFee": {
+          "type": "number",
+          "description": "Delivery shipping fee"
+        },
+        "totalTTC": {
+          "type": "number",
+          "description": "Total all taxes included"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Confirmée", "En préparation", "En cours de livraison", "Livrée", "Annulée"],
+          "description": "Current order fulfillment state"
+        },
+        "trackingNumber": {
+          "type": "string",
+          "description": "Aramex tracking identifier"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Order creation ISO timestamp"
+        }
+      },
+      "required": ["id", "invoiceNumber", "customerName", "customerEmail", "totalTTC", "status"]
+    },
+    "ProductStats": {
+      "title": "ProductStats",
+      "description": "Analytics tracking for bestsellers and underperforming products",
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description": "Product identifier"
+        },
+        "productName": {
+          "type": "string",
+          "description": "Product name"
+        },
+        "salesCount": {
+          "type": "number",
+          "description": "Number of units sold"
+        },
+        "revenue": {
+          "type": "number",
+          "description": "Total revenue generated in DT"
+        },
+        "returnsCount": {
+          "type": "number",
+          "description": "Returns or exchange count"
+        },
+        "viewsCount": {
+          "type": "number",
+          "description": "Product 3D view count"
+        },
+        "rating": {
+          "type": "number",
+          "description": "Average review rating"
+        },
+        "stockLevel": {
+          "type": "number",
+          "description": "Available inventory units"
+        }
+      },
+      "required": ["productId", "productName", "salesCount", "revenue"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Customer product reviews with rating and verified purchase status",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique review identifier"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Product ID being reviewed"
+        },
+        "productName": {
+          "type": "string",
+          "description": "Product name"
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the reviewer"
+        },
+        "userName": {
+          "type": "string",
+          "description": "Display name of reviewer"
+        },
+        "userEmail": {
+          "type": "string",
+          "format": "email",
+          "description": "Email of reviewer"
+        },
+        "rating": {
+          "type": "number",
+          "description": "Rating score from 1 to 5"
+        },
+        "title": {
+          "type": "string",
+          "description": "Review headline"
+        },
+        "comment": {
+          "type": "string",
+          "description": "Detailed review feedback"
+        },
+        "isVerifiedPurchase": {
+          "type": "boolean",
+          "description": "True if customer confirmed purchase in Firestore orders"
+        },
+        "sizeFit": {
+          "type": "string",
+          "enum": ["Taille trop petit", "Parfait / Conforme", "Taille trop grand"],
+          "description": "Perceived size accuracy"
+        },
+        "comfortScore": {
+          "type": "number",
+          "description": "Comfort rating out of 5"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Review submission ISO timestamp"
+        },
+        "helpfulCount": {
+          "type": "number",
+          "description": "Number of users who found this review helpful"
+        }
+      },
+      "required": ["id", "productId", "userId", "userName", "rating", "comment", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "User" },
+      "description": "Stores user profiles, subscriptions and roles"
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "Order" },
+      "description": "Stores orders and electronic invoicing records"
+    },
+    "/productStats/{productId}": {
+      "schema": { "$ref": "ProductStats" },
+      "description": "Stores performance and revenue stats for admin gestionnaire"
+    },
+    "/reviews/{reviewId}": {
+      "schema": { "$ref": "Review" },
+      "description": "Stores customer product reviews and verified purchase validations"
+    }
+  }
+}
